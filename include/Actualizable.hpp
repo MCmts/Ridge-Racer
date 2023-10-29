@@ -6,9 +6,8 @@ private:
     /* data */
 public:
     Actualizable() {}
-    
-    virtual void Actualizar(){}
+
+    virtual void Actualizar() {}
 
     ~Actualizable() {}
 };
-

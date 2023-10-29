@@ -1,37 +1,39 @@
 #include <Actualizable.hpp>
 #include <list>
 #include <iostream>
-#include<string.h>
-#include<curses.h>
+#include <string.h>
+#include <curses.h>
 #include <Ventana.hpp>
-#include<Carro.hpp>
+#include <Carro.hpp>
 using namespace std;
 
-int main (int argc, char const *argv[])
+int main(int argc, char const *argv[])
 {
-    Carro* car1 = new Carro(0,0);
+    Carro *car1 = new Carro(0, 0);
 
-    Ventana* ventana = new Ventana();
+    Ventana *ventana = new Ventana();
 
-    list<Dibujo*> dibujos;
+    list<Dibujo *> dibujos;
     dibujos.push_back(car1);
 
-    list<Actualizable*> actualizables;
+    list<Actualizable *> actualizables;
     actualizables.push_back(car1);
 
-     while (!ventana-> Debocerrar())
+    while (!ventana->Debocerrar())
     {
-        int key= getch();
-        if (key == 'a'|| key ==KEY_LEFT){
+        int key = getch();
+        if (key == 'a' || key == KEY_LEFT)
+        {
             car1->Avanzar();
         }
 
-        if (key == 'd'|| key ==KEY_RIGHT) {
+        if (key == 'd' || key == KEY_RIGHT)
+        {
             car1->CambiarDireccion();
         }
-        
+
         ventana->Dibujar(dibujos);
-       //ventana->Actualizar(actualizables);   
+        // ventana->Actualizar(actualizables);
     };
 
     return 0;

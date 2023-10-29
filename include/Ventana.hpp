@@ -1,8 +1,8 @@
 #pragma once
 
-#include<curses.h>
-#include<unistd.h>
-#include<Dibujo.hpp>
+#include <curses.h>
+#include <unistd.h>
+#include <Dibujo.hpp>
 #include <Actualizable.hpp>
 #include <list>
 
@@ -10,68 +10,66 @@ using namespace std;
 
 class Ventana
 {
- private:
+private:
     int x;
     int y;
     bool cerrar;
 
- public:
+public:
     Ventana()
     {
-        initscr(); //Iniciar pantalla
+        initscr(); // Iniciar pantalla
 
-        //Eliminar cursor de pantalla
+        // Eliminar cursor de pantalla
         noecho();
         curs_set(FALSE);
 
-        //no bloquear consola
+        // no bloquear consola
         cbreak();
         timeout(10);
-        keypad(stdscr,TRUE);
+        keypad(stdscr, TRUE);
 
-        //inicializar clase
+        // inicializar clase
         getmaxyx(stdscr, y, x);
         cerrar = false;
     }
 
-    void Actualizar(list<Actualizable*> listaActualizables)
+    void Actualizar(list<Actualizable *> listaActualizables)
     {
-        //getch();
+        // getch();
 
         for (auto &&iterator : listaActualizables)
         {
-            iterator->Actualizar();            
+            iterator->Actualizar();
         }
-        
+
         usleep(41000);
     }
 
-    void Dibujar(list<Dibujo*> listaDibujos)
+    void Dibujar(list<Dibujo *> listaDibujos)
     {
         clear();
         box(stdscr, '|', '#');
-        for (auto &&dibujo: listaDibujos)
+        for (auto &&dibujo : listaDibujos)
         {
-           dibujo->Dibujar();
+            dibujo->Dibujar();
         }
-        
+
         refresh();
     }
 
-    bool  Debocerrar()
+    bool Debocerrar()
     {
-        return this->cerrar ;
+        return this->cerrar;
     }
 
-void Cerrar()
-{
-    this->cerrar= true;
-}
+    void Cerrar()
+    {
+        this->cerrar = true;
+    }
 
-   ~Ventana()
+    ~Ventana()
     {
         endwin();
     }
-
-    
 };
