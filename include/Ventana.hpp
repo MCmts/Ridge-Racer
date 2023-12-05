@@ -33,6 +33,15 @@ public:
         getmaxyx(stdscr, y, x);
         cerrar = false;
     }
+     void MostrarPantallaInicio(Dibujo* pantallaInicio)
+    {
+        clear();
+        pantallaInicio->Dibujar();
+        refresh();
+        getch();  // Espera a que el usuario presione cualquier tecla
+        clear();
+    }
+
 
     void Actualizar(list<Actualizable *> listaActualizables)
     {
